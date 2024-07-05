@@ -1,0 +1,6 @@
+Dataset,Artworks,With date,With place,With date and place,With author,With author with date,With author with place,With author aligned to Wikidata,With author aligned to ULAN
+Arco,2184507,2142517,984,984,524201,257906,259159,148802,0
+Zeri,20082,20010,0,0,19061,0,0,0,0
+Europeana,369853,306445,175784,152908,112330,68532,2,127,118
+DBpedia,12446,248,0,0,9119,0,882,7400,16
+Wikidata,3210159,1081449,58247,47186,1221048,1051582,942830,0,826320
