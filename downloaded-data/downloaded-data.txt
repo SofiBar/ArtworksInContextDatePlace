@@ -1,0 +1,5 @@
+datasets downloaded: 
+
+- Rijksmuseum described according to the Europeana Data Model (rdf). File downloaded: 202020-rma-edm-collection.zip,  from https://data.rijksmuseum.nl/object-metadata/download/ 
+- Metropolitan Museum of Art (csv) from https://github.com/metmuseum/openaccess
+- Tate Gallery (json) from https://github.com/tategallery/collection 
