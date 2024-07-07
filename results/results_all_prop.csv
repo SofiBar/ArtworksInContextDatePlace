@@ -1,0 +1,9 @@
+Dataset,With date,With place,With date and place,With author,With author with date,With author with place,Aligned to Wikidata,With author aligned to ULAN or Wikidata
+Arco,98.08,0.05,0.05,24.0,11.81,11.86,6.81,0.0
+Zeri,99.64,0.0,0.0,94.92,0.0,0.0,0.0,0.0
+Europeana,82.86,47.53,41.34,30.37,18.53,0.0,0.03,0.03
+DBpedia,1.99,0.0,0.0,73.27,0.0,7.09,59.46,0.13
+Wikidata,33.83,1.82,1.47,38.07,32.79,29.41,0.0,25.77
+Rijksmuseum,100.0,69.08,68.81,93.49,60.49,56.68,0.0,0.0
+Tate,91.37,0.0,0.0,100.0,99.23,96.27,0.0,0.0
+Metropolitan,100.0,0.0,0.0,58.13,58.13,0.0,14.22,46.92
