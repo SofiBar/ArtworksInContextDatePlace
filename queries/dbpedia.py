@@ -342,6 +342,29 @@ def q_db_author_place_tot():
     return int(tot)
 
 
+def q_db_art_aligned_tot(): 
+    "Count of artworks having an author aligned with Wikidata"
+    q = """ 
+
+    prefix dbo: <http://dbpedia.org/ontology/>
+    prefix dcterms: <http://purl.org/dc/terms/>
+    prefix dbp: <http://dbpedia.org/property/>
+
+
+     select (count(distinct ?art) as ?tot) where {
+    
+    ?art a dbo:Artwork; 
+         owl:sameAs ?aligned. 
+
+    FILTER(regex(str(?aligned), "wikidata", "i"))
+    } 
+
+    """
+    res = sparql_query_setting(q, db_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
+
 
 def q_db_author_wikidata(): 
 
@@ -414,6 +437,31 @@ def q_db_author_ulan_tot():
     ?author owl:sameAs ?aligned.
 
     FILTER(regex(str(?aligned), "ulan", "i"))
+    } 
+
+    """
+    res = sparql_query_setting(q, db_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
+
+
+def q_db_author_aligned_tot(): 
+    "Count of artworks having an author aligned with ULAN or Wikidata"
+    q = """ 
+
+    prefix dbo: <http://dbpedia.org/ontology/>
+    prefix dcterms: <http://purl.org/dc/terms/>
+    prefix dbp: <http://dbpedia.org/property/>
+    
+     select (count(distinct ?art) as ?tot) where {
+    
+    ?art a dbo:Artwork; 
+        dbp:author | dbp:artist ?author.
+       
+    ?author owl:sameAs ?aligned.
+
+    FILTER((regex(str(?aligned), "ulan", "i") || regex(str(?aligned), "wikidata", "i")))
     } 
 
     """

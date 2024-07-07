@@ -14,7 +14,7 @@ def q_wd_tot():
 
   select (count(distinct ?art) as ?tot) where {
   
-  wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art. # visual work
+  wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art. # visual work
  
 }
 
@@ -33,8 +33,8 @@ def q_wd_date():
 
     
     select distinct ?art ?date where {
-    
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    # Q4502142: visual artwork
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P571 ?date.
   
 } LIMIT 100
@@ -56,7 +56,7 @@ def q_wd_date_tot():
     select distinct  (count (distinct ?art) as ?tot) where {
     
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P571 ?date.
 } 
 
@@ -73,7 +73,7 @@ def q_wd_place():
     
     select distinct  ?art ?site where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P1071 ?site. 
 
 
@@ -95,7 +95,7 @@ def q_wd_place_tot():
     
     select distinct  (count (distinct ?art) as ?tot) where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P1071 ?site. 
 
 } 
@@ -115,7 +115,7 @@ def q_wd_date_place():
     select distinct  ?art ?date ?site where {
     
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P1071 ?site;
         wdt:P571 ?date.
     
@@ -142,7 +142,7 @@ def q_wd_date_place_tot():
     select (count (distinct ?art) as ?tot) where {
     
 
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P1071 ?site;
         wdt:P571 ?date.
 
@@ -166,7 +166,7 @@ def q_wd_author():
     
     select distinct ?art ?author where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 ?author.
   
 } LIMIT 100
@@ -190,7 +190,7 @@ def q_wd_author_tot():
     
     select (count(distinct ?art) as ?tot) where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 ?author.
     } 
 
@@ -210,7 +210,7 @@ def q_wd_author_date():
     
     select distinct ?art ?author ?date where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 / (wdt:P569 | wdt:P570) ?dated.
   
 } LIMIT 100
@@ -233,7 +233,7 @@ def q_wd_author_date_tot():
     
     select (count(distinct ?art) as ?tot) where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 / (wdt:P569 | wdt:P570) ?dated.
     } 
 
@@ -252,7 +252,7 @@ def q_wd_author_place():
 
     select distinct ?art ?author ?place where {
     
-    wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+    wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 / (wdt:P19 | wdt:P20) ?dated.
   
 } LIMIT 100
@@ -275,7 +275,7 @@ def q_wd_author_place_tot():
     
     select (count(distinct ?art) as ?tot) where {
     
-        wd:Q110910970 ^(wdt:P31/wdt:P279*)  ?art.
+        wd:Q4502142 ^(wdt:P31/wdt:P279*)  ?art.
     ?art wdt:P170 / (wdt:P19 | wdt:P20) ?dated.
 
     } 
@@ -304,7 +304,7 @@ def q_wd_author_ulan_tot():
     q = """ 
      select (count(distinct ?art) as ?tot) where {
     
-        wd:Q110910970 ^(wdt:P31/wdt:P279*) ?art. 
+        wd:Q4502142 ^(wdt:P31/wdt:P279*) ?art. 
         ?ulan ^wdt:P245 / ^wdt:P170 ?art.
     } 
 

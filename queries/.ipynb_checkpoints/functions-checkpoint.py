@@ -13,14 +13,6 @@ def sparql_query_setting(query, endpoint):# set the endpoint
   return results
 
 
-
-def query_wrapper_tot(q, endpoint): 
-    "function to launch queries retrieving only a sum of results"
-    res = sparql_query_setting(q, endpoint)
-    tot =  res["results"]["bindings"][0]["tot"]["value"]
-    return int(tot)
-
-
 def pprint_prop(num1, tot, l, l_prop): 
     "prints the number and the proportion over the total of artworks. It adds the absolute number to the dataset list and the percentage to the dataset proportion list" 
     p = round((int(num1)/int(tot))*100, 2)

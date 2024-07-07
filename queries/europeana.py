@@ -399,7 +399,33 @@ def q_eu_author_place_tot():
 
 
 
+def q_eu_art_aligned_tot():
+    q = """ 
 
+    PREFIX ore: <http://www.openarchives.org/ore/terms/>
+    PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX rdaGr2: <http://rdvocab.info/ElementsGr2/>
+        
+    
+    select (count (distinct ?art) as ?tot) where{
+    
+      ?s a skos:Concept ;
+            skos:broader*  <http://vocab.getty.edu/aat/300191086>. # aat term for visual work
+    ?art dc:type ?s ;
+       owl:sameAs ?a.
+    
+    FILTER(regex(str(?a), "wikidata", "i"))
+    } 
+
+
+    """
+
+    res = sparql_query_setting(q, eu_endpoint)
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
 
 
 
@@ -543,6 +569,35 @@ def q_eu_author_ulan_tot():
     tot =  res["results"]["bindings"][0]["tot"]["value"]
     return int(tot)
 
+
+def q_eu_author_aligned_tot():
+    q = """ 
+
+    PREFIX ore: <http://www.openarchives.org/ore/terms/>
+    PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX rdaGr2: <http://rdvocab.info/ElementsGr2/>
+        
+    
+    select (count (distinct ?art) as ?tot) where{
+    
+      ?s a skos:Concept ;
+            skos:broader*  <http://vocab.getty.edu/aat/300191086>. # aat term for visual work
+    ?art dc:type ?s ;
+      dc:creator ?author. 
+    ?author owl:sameAs ?a.
+    
+    FILTER((regex(str(?aligned), "ulan", "i") || regex(str(?aligned), "wikidata", "i")))
+    } 
+
+
+    """
+
+    res = sparql_query_setting(q, eu_endpoint)
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
 
 
 

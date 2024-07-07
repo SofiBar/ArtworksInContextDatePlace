@@ -310,6 +310,32 @@ def q_zeri_author_place_tot():
 
 
 
+def q_zeri_art_aligned_tot(): 
+    "Count of artworks aligned with Wikidata"
+    q = """ 
+
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX fabio: <http://purl.org/spar/fabio/>
+    PREFIX oaentry: <http://purl.org/emmedi/oaentry/>
+    
+    select (count(distinct ?art) as ?tot) where {
+    
+    ?cre ^crm:P94i_was_created_by ?art. 
+    ?art a fabio:ArtisticWork;
+        owl:sameAs ?aligned. 
+  
+
+    FILTER(regex(str(?aligned), "wikidata", "i"))
+    } 
+
+    """
+    res = sparql_query_setting(q, zeri_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
+
+
 def q_zeri_author_aligned(): 
 
     q = """ 
@@ -383,6 +409,33 @@ def q_zeri_author_ulan_tot():
   
 
     FILTER(regex(str(?aligned), "ulan", "i"))
+    } 
+
+    """
+    res = sparql_query_setting(q, zeri_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
+
+
+def q_zeri_author_aligned_tot(): 
+    "Count of artworks having an author aligned with ULAN or Wikidata"
+    q = """ 
+
+       PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX fabio: <http://purl.org/spar/fabio/>
+    PREFIX oaentry: <http://purl.org/emmedi/oaentry/>
+    
+    select (count(distinct ?art) as ?tot) where {
+    
+    ?cre ^crm:P94i_was_created_by ?art; 
+        crm:P14_carried_out_by ?author.  
+    ?art a fabio:ArtisticWork.
+    ?author owl:sameAs ?aligned. 
+  
+
+    FILTER((regex(str(?aligned), "ulan", "i") || regex(str(?aligned), "wikidata", "i")))
     } 
 
     """

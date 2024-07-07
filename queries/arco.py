@@ -352,7 +352,32 @@ def q_arco_author_place_tot():
     tot =  res["results"]["bindings"][0]["tot"]["value"]
     return int(tot)
 
+#------------- ALIGNMENTS -------------------#
 
+def q_arco_art_aligned_tot(): 
+    "Count of artworks being aligned to wikidata"
+    q = """ 
+
+    PREFIX a-arco: <https://w3id.org/arco/ontology/arco/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX cpv: <https://w3id.org/italia/onto/CPV/>
+    
+    
+    select (count(distinct ?art) as ?tot) where {
+    
+    ?art a a-arco:HistoricOrArtisticProperty;
+           owl:sameAs ?aligned. 
+
+    FILTER(regex(str(?aligned), "wikidata", "i"))
+    } 
+
+    """
+
+
+    res = sparql_query_setting(q, arco_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
 
 def q_arco_author_wikidata(): 
 
@@ -428,6 +453,33 @@ def q_arco_author_ulan_tot():
     ?author owl:sameAs ?aligned. 
 
     FILTER(regex(str(?aligned), "ulan", "i"))
+    } 
+
+    """
+    res = sparql_query_setting(q, arco_endpoint)
+
+    tot =  res["results"]["bindings"][0]["tot"]["value"]
+    return int(tot)
+
+
+def q_arco_author_aligned_tot(): 
+    "Count of artworks having an author aligned with ULAN"
+    q = """ 
+
+    PREFIX a-arco: <https://w3id.org/arco/ontology/arco/>
+    PREFIX dc: <http://purl.org/dc/elements/1.1/>
+    PREFIX cpv: <https://w3id.org/italia/onto/CPV/>
+    
+     select (count(distinct ?art) as ?tot) where {
+    
+    ?art a a-arco:HistoricOrArtisticProperty;
+                   rdfs:label ?label;
+                 dc:creator ?author.
+       
+    ?author owl:sameAs ?aligned. 
+
+    # either ulan or wikidata
+    FILTER((regex(str(?aligned), "ulan", "i") || regex(str(?aligned), "wikidata", "i")))
     } 
 
     """
