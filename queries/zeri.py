@@ -94,7 +94,7 @@ def q_zeri_place():
     select distinct ?art ?place where {
     
     ?cre ^crm:P94i_was_created_by ?art; 
-        crm:crm:P7_took_place_at ?place. 
+        crm:P7_took_place_at ?place. 
     ?art a fabio:ArtisticWork.
     }  LIMIT 100
 

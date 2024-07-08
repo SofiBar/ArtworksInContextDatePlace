@@ -32,6 +32,19 @@ def pprint_prop(num1, tot, l, l_prop):
     print(l_prop)
     return p
 
+
+def make_prop_list(res_list): 
+    "returns the dataset proportion list. Total of artwork at index one, name of dataset at index 0 of the list" 
+    # append the name of the dataset to the prop_list
+    l_prop = [res_list[0]]
+    tot = res_list[1]
+    for num in res_list[2:]:
+        p = round((int(num)/int(tot))*100, 2)
+        l_prop.append(p)
+  
+    return l_prop
+
+
 def q_rdflib_tot(q, g): 
     "Input: every SPARQL query having 'tot' as unique result. Query against a given graph with rdflib"
 
