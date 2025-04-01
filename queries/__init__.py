@@ -8,3 +8,4 @@ from .europeana import *
 from .wikidata import *
 from .rijksmuseum import *
 from .dbpedia import *
+from .rkd import *
